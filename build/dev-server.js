@@ -1,23 +1,23 @@
-const webpackDevServer = require('webpack-dev-server'),
+const webpackDevMiddleware = require('webpack-dev-middleware'),
     webpack = require('webpack'),
+    express = require("express"),
+    app = express(),
     baseConfig = require("./webpack.base.conf"),
     path = require("path"),
     merge = require("webpack-merge"),
-    options = {
-        historyApiFallback: true,
-        contentBase: path.resolve(__dirname, "../dist"),
-        hot: true,
-    },
     devConfig = merge(baseConfig, {
         devtool: "source-map",
         mode: "development"
     }),
+    compiler = webpack(devConfig),
     port = process.env.port || 8000;
 
-webpackDevServer.addDevServerEntrypoints(devConfig, options);
-const compiler = webpack(devConfig);
-const server = new webpackDevServer(compiler, options);
-
-server.listen(port, 'localhost', () => {
-    console.log(`dev server listening on port ${port}`);
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: baseConfig.output.publicPath,
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, "../dist"),
+    hot: true
+}));
+app.listen(port, function () {
+    console.log(`app listening on port ${port}!\n`);
 });
