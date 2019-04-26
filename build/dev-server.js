@@ -8,7 +8,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware'),
     compiler = webpack(config),
     port = process.env.port || 8000,
     proxy = require('http-proxy-middleware'),
-    proxyOptions = proxy(config.proxy);
+    proxyConfig = config.proxy;
 
 app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
@@ -17,7 +17,13 @@ app.use(webpackDevMiddleware(compiler, {
     hot: true
 }));
 app.use(hotMiddleware(compiler));
-app.use(config.proxyPrefix, proxyOptions);
+if (proxyConfig) {
+    for (let key in proxyConfig) {
+        if (proxyConfig.hasOwnProperty(key)) {
+            app.use(key, proxy(proxyConfig[key]));
+        }
+    }
+}
 app.listen(port, function () {
     console.log(`app listening on port ${port}!\n`);
 });
