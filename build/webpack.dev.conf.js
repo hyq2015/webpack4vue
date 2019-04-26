@@ -1,9 +1,13 @@
 const baseConfig = require("./webpack.base.conf"),
-    path = require("path"),
+    webpack = require("webpack"),
     merge = require("webpack-merge"),
     devConfig = merge(baseConfig, {
+        entry: ["webpack-hot-middleware/client"],
         devtool: "source-map",
-        mode: "development"
+        mode: "development",
+        plugins:[new webpack.HotModuleReplacementPlugin()]
     });
+console.log(devConfig);
 module.exports = devConfig;
+
 

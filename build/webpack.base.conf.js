@@ -4,7 +4,9 @@ const webpack = require("webpack"),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: path.resolve(__dirname,"../src/index.js"),
+    entry: [
+        path.resolve(__dirname,"../src/index.js")
+    ],
     output: {
         filename: "[name].[hash].bundle.js",
         path: path.resolve(__dirname,"../dist"),
@@ -58,7 +60,7 @@ module.exports = {
         }
     },
     plugins: [
-        // new CleanWebpackPlugin([path.resolve(__dirname, "../dist")]),
+        new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../src/index.html"),
