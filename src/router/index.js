@@ -1,6 +1,6 @@
 import Router from "vue-router";
 import Vue from "vue";
-import HelloWorld from "../components/HelloWorld";
+const HelloWorld = () => import('../components/HelloWorld');
 Vue.use(Router);
 const routes = [
     {path: "/", component: HelloWorld}

@@ -1,4 +1,4 @@
-const baseConfig = require("./webpack.base.conf"),
+const baseConfig = require("./base.conf"),
     webpack = require("webpack"),
     merge = require("webpack-merge"),
     devConfig = merge(baseConfig, {
