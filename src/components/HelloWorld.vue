@@ -13,7 +13,7 @@
                 Visit Ricky's github url!
             </a>
         </h2>
-        <div @click="goHome">
+        <div @click="goHome" class="home">
             home
         </div>
     </div>
