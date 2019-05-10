@@ -10,6 +10,11 @@ rules["vue/script-indent"] = [
         baseIndent: 1
     }
 ];
+rules["vue/max-attributes-per-line"] = [
+    "error", {
+        "singleline": 1
+    }
+];
 cfg = Object.assign({}, dftCfg, {
     root: true,
     // required to lint *.vue files
@@ -18,7 +23,7 @@ cfg = Object.assign({}, dftCfg, {
     ],
     extends: [
         "eslint:recommended",
-        "plugin:vue/recommended"
+        "plugin:vue/strongly-recommended"
     ],
     parserOptions: {
         parser: "babel-eslint",

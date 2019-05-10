@@ -6,6 +6,8 @@ const webpack = require("webpack"),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: [
+        "core-js/modules/es.promise", // 做了按路由加载，所以需要添加这两个依赖在entry里面
+        "core-js/modules/es.array.iterator",
         path.resolve(__dirname,"../src/index.js")
     ],
     output: {
@@ -51,6 +53,11 @@ module.exports = {
                 test: /\.vue$/,
                 exclude:/node_modules/,
                 use: ["vue-loader"]
+            },
+            {
+                test: /\.jsx?$/,
+                exclude:/node_modules/,
+                use: ["babel-loader"]
             }
         ]
     },
@@ -96,6 +103,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
+        new webpack.NormalModuleReplacementPlugin(/es6-promise$/, 'bluebird'),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../index.html"),
             inject: "body"

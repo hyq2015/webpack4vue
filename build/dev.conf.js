@@ -2,7 +2,10 @@ const baseConfig = require("./base.conf"),
     webpack = require("webpack"),
     merge = require("webpack-merge"),
     devConfig = merge(baseConfig, {
-        entry: ["webpack-hot-middleware/client"],
+        entry: [
+            "eventsource-polyfill",
+            "webpack-hot-middleware/client"
+        ],
         devtool: "source-map",
         mode: "development",
         plugins:[new webpack.HotModuleReplacementPlugin()]

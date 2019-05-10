@@ -1,8 +1,8 @@
-/* eslint-disable */
 import Router from "vue-router";
 import Vue from "vue";
 
 Vue.use(Router);
+
 const HelloWorld = () => import("../components/HelloWorld"),
     Page404 = () => import("../components/404"),
     routes = [
@@ -26,7 +26,6 @@ function isValidPage (path) {
 }
 
 router.beforeEach((to, from, next) => {
-    console.log(to.path);
     if (!isValidPage(to.path)) {
         next("/404");
     } else {
