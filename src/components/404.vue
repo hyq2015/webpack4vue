@@ -1,13 +1,22 @@
 <template>
     <div class="page-not-found">
         <h1>404</h1>
-        <h1>Page Not Found!</h1>
+        <h1>{{ notFoundText }}</h1>
     </div>
 </template>
 
 <script>
+    import { mapState } from "vuex";
     export default {
-        name: "NotFound"
+        name: "NotFound",
+        computed: {
+            ...mapState("NotFoundStore", [
+                "notFoundText"
+            ])
+        },
+        created () {
+            this.$store.dispatch("NotFoundStore/setText", "Page Not Found!");
+        }
     };
 </script>
 

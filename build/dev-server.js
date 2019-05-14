@@ -5,26 +5,31 @@ const webpackDevMiddleware = require('webpack-dev-middleware'),
     app = express(),
     dev = require("./dev.conf"),
     compiler = webpack(dev.devConfig),
-    port = process.env.port || 8000,
     proxy = require('http-proxy-middleware'),
-    path = require('path'),
-    history = require('connect-history-api-fallback');
-console.log(path.resolve(__dirname,"../src/index.html"));
-app.use(history());
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: dev.devConfig.output.publicPath,
-    quiet: true
-}));
-app.use(hotMiddleware(compiler));
-if (dev.proxyConfig) {
-    for (let key in dev.proxyConfig) {
-        if (dev.proxyConfig.hasOwnProperty(key)) {
-            app.use(key, proxy(dev.proxyConfig[key]));
+    history = require('connect-history-api-fallback'),
+    portfinder = require('portfinder'),
+    log = require('webpack-log')({name: "app", timestamp: true}),
+    open = require('open'),
+    instance = webpackDevMiddleware(compiler, {
+        publicPath: dev.devConfig.output.publicPath,
+        index: "index.html",
+        logLevel: "error"
+    });
+
+portfinder.getPort(function (err, port) {
+    app.use(history());
+    app.use(instance);
+    app.use(hotMiddleware(compiler));
+    if (dev.proxyConfig) {
+        for (let key in dev.proxyConfig) {
+            if (dev.proxyConfig.hasOwnProperty(key)) {
+                app.use(key, proxy(dev.proxyConfig[key]));
+            }
         }
     }
-}
-
-
-app.listen(port, function () {
-    console.log(`app listening on port ${port}!\n`);
+    instance.waitUntilValid(async () => {
+        log.info(`open your app at http://localhost:${port}`);
+        await open (`http://localhost:${port}`);
+    });
+    app.listen(port);
 });
