@@ -14,7 +14,7 @@
                 "notFoundText"
             ])
         },
-        created () {
+        created() {
             this.$store.dispatch("NotFoundStore/setText", "Page Not Found!");
         }
     };

@@ -4,13 +4,12 @@ const state = {
     },
     /* eslint-disable  no-unused-vars*/
     actions = {
-        setUerUrl ({ commit, state }, text) {
-
+        setUerUrl({ commit, state }, text) {
             commit ("onSetUerUrl", text);
         }
     },
     mutations = {
-        onSetUerUrl (state, text) {
+        onSetUerUrl(state, text) {
             state.userUrl = text;
         }
     };

@@ -28,11 +28,11 @@
                 "notFoundText"
             ])
         },
-        created () {
+        created() {
             this.$store.dispatch("HelloWorldStore/setUerUrl", "Visit Ricky's github url!");
         },
         methods: {
-            goHome () {
+            goHome() {
                 this.$router.push("/home");
             }
         }

@@ -4,13 +4,13 @@ const state = {
     },
     /* eslint-disable  no-unused-vars*/
     actions = {
-        setText ({ commit, state }, text) {
+        setText({ commit, state }, text) {
 
             commit ("onSetNotFound", text);
         }
     },
     mutations = {
-        onSetNotFound (state, text) {
+        onSetNotFound(state, text) {
             state.notFoundText = text;
         }
     };

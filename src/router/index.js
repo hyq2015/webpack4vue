@@ -14,7 +14,7 @@ const HelloWorld = () => import("../components/HelloWorld"),
         routes: routes
     });
 
-function isValidPage (path) {
+function isValidPage(path) {
     let flag = false;
     for (let item of routes) {
         if (item.path === path) {
