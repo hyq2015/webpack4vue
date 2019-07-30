@@ -2,8 +2,8 @@ const webpack = require("webpack"),
     path = require("path"),
     VueLoaderPlugin = require("vue-loader/lib/plugin"),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: [
         "core-js/modules/es.promise", // 做了按路由加载，所以需要添加这两个依赖在entry里面
@@ -66,38 +66,6 @@ module.exports = {
         alias: {
             'vue': 'vue/dist/vue.js',
             '@':path.resolve(__dirname,'../src')
-        }
-    },
-    optimization: {
-        minimizer: [new UglifyJsPlugin({
-            test: /\.js(\?.*)?$/i,
-            exclude: /\/node_modules/
-        })],
-        runtimeChunk: {
-            name: "manifest"
-        },
-        splitChunks: {
-            chunks: 'all',
-            minSize: 30000,
-            maxSize: 0,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            automaticNameDelimiter: '~',
-            name: true,
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10
-                },
-                common: {
-                    name: "common",
-                    test:/[\\/]src[\\/]js[\\/]/,
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
-                }
-            }
         }
     },
     plugins: [
