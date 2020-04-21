@@ -4,7 +4,7 @@ const baseConfig = require("./base.conf"),
     devConfig = merge(baseConfig, {
         entry: [
             "eventsource-polyfill",
-            "webpack-hot-middleware/client"
+            "webpack-hot-middleware/client?reload=true"
         ],
         devtool: "source-map",
         mode: "development",
