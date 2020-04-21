@@ -8,7 +8,8 @@
     "build-dev": "node ./build/dev-server.js",
     "dev": "run-s eslint stylelint build-dev",
     "eslint": "eslint --ext .js,.vue src",
-    "stylelint": "stylelint ./src/**/*.scss ./src/**/*.less"
+    "stylelint": "stylelint ./src/**/*.scss ./src/**/*.less",
+    "prod": "node ./build/build.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "@babel/preset-env": "7.4.4",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
+    "chalk": "^2.4.2",
     "clean-webpack-plugin": "2.0.1",
     "connect-history-api-fallback": "1.6.0",
     "css-loader": "2.1.1",
@@ -45,7 +47,9 @@
     "node-sass": "4.11.0",
     "npm-run-all": "4.1.5",
     "open": "6.3.0",
+    "ora": "^3.4.0",
     "portfinder": "1.0.20",
+    "rimraf": "^2.6.3",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
     "uglifyjs-webpack-plugin": "2.1.2",
